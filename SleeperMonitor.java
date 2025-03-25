@@ -3,12 +3,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SleeperMonitor implements Runnable {
 
-    private Semaphore studentWainting;
+    private Semaphore studentsWaiting;
     private Semaphore monitor;
     private boolean isBussy = false;
 
-    public SleeperMonitor(Semaphore studentWainting, Semaphore monitor) {
-        this.studentWainting = studentWainting;
+    public SleeperMonitor(Semaphore studentsWaiting, Semaphore monitor) {
+        this.studentsWaiting = studentsWaiting;
         this.monitor = monitor;
     }
 
@@ -38,11 +38,11 @@ public class SleeperMonitor implements Runnable {
                 Thread.sleep(ThreadLocalRandom.current().nextInt(1000, 5000));
                 System.out.println("\nEl monitor ha terminado de atender al estudiante");
 
-                if (studentWainting.availablePermits() == 3) {
+                if (studentsWaiting.availablePermits() == 3) {
                     System.out.println("\nComo ya no hay más estudiantes para atender, el monitor se va a dormir zzz");
-
+                    isBussy = false;
                 } else {
-                    System.out.println("\nCómo no hay sillas, el estudiante se va a programar a la sala de computo...");
+                    studentsWaiting.release();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

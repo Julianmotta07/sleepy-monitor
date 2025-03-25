@@ -28,13 +28,13 @@ public class Main {
                         + //
                         "                                  \\__|                                                                                                   ");
 
-        Semaphore studentWainting = new Semaphore(numSeats, true);
+        Semaphore studentsWaiting = new Semaphore(numSeats, true);
         Semaphore monitor = new Semaphore(0, true);
-        Thread monitorThread = new Thread(new SleeperMonitor(studentWainting, monitor));
+        Thread monitorThread = new Thread(new SleeperMonitor(studentsWaiting, monitor));
         monitorThread.start();
 
         for (int i = 0; i < numStudents; i++) {
-            Thread studentThread = new Thread(new Student(i, studentWainting, monitor));
+            Thread studentThread = new Thread(new Student(i, studentsWaiting, monitor));
             studentThread.start();
         }
     }
