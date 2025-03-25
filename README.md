@@ -69,8 +69,8 @@ Verás en la consola cómo los estudiantes programan, piden ayuda, despiertan al
 
 ## Integrantes del grupo
 
-- **Daron**
-- **Miguel**
+- **Daron Mercado**
+- **Miguel Angel Martinez**
 - **Julian Motta**
 
 ---
